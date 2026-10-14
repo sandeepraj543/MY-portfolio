@@ -5,7 +5,9 @@ const showMenu = (toggleId, navId) =>{
 
     if(toggle && nav){
         toggle.addEventListener('click', ()=>{
-            nav.classList.toggle('show')
+            const isOpen = nav.classList.toggle('show')
+            toggle.setAttribute('aria-expanded', isOpen)
+            toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu')
         })
     }
 }
@@ -16,8 +18,11 @@ const navLink = document.querySelectorAll('.nav__link')
 
 function linkAction(){
     const navMenu = document.getElementById('nav-menu')
+    const navToggle = document.getElementById('nav-toggle')
     // When we click on each nav__link, we remove the show-menu class
     navMenu.classList.remove('show')
+    navToggle.setAttribute('aria-expanded', 'false')
+    navToggle.setAttribute('aria-label', 'Open navigation menu')
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
